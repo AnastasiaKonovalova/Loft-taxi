@@ -1,10 +1,10 @@
 import { reducer as formReducer, startSubmit, stopSubmit, SubmissionError } from "redux-form";
 import { all, put, call, take, takeEvery, takeLatest, takeLeading } from "redux-saga/effects";
 
-import {login, testAuth} from '../actions';
-import {checkAuth} from '../helpers_api';
+import { login, testAuth } from '../actions';
+import { checkAuth } from '../helpers_api';
 
-function * authPostWorker(action) {
+export function * authPostWorker(action) {
     try {
         const result = yield call(checkAuth, action.payload)
 
@@ -14,7 +14,7 @@ function * authPostWorker(action) {
     }
 }
 
-function * authWorker (action){
+export function * authWorker (action){
     // while(true){
         // const authAction = yield take(testAuth.toString());
         yield put(startSubmit('loginform'));

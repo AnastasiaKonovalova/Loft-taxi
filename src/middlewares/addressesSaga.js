@@ -2,7 +2,7 @@ import { all, put, call, take, takeEvery } from "redux-saga/effects";
 import {fetchAddressesRequest, fetchAddressesSuccess, fetchAddressesFailure} from '../actions';
 import {loadAddressList} from '../helpers_api';
 
-function * fetchAddressesWorker(action){
+export function * fetchAddressesWorker(action){
     try {
         const myAddresses = yield call(loadAddressList);
 
@@ -12,7 +12,7 @@ function * fetchAddressesWorker(action){
     }
 }
 
-function * saveAddressesWorker(action){
+export function * saveAddressesWorker(action){
     const {error, addresses} = yield call(fetchAddressesWorker);
     
     if(error){

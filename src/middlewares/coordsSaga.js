@@ -3,7 +3,7 @@ import { all, put, call, take, takeEvery } from "redux-saga/effects";
 import {fetchCoordsRequest, fetchCoordsSuccess, fetchCoordsFailure} from '../actions';
 import {loadCoords} from '../helpers_api';
 
-function * fetchCoordsWorker(action){
+export function * fetchCoordsWorker(action){
     try {
         const coords = yield call(loadCoords, action.payload);
         return {coords};
@@ -12,7 +12,7 @@ function * fetchCoordsWorker(action){
     }
 }
 
-function * saveCoordsWorker(action){
+export function * saveCoordsWorker(action){
     const {error, coords} = yield call(fetchCoordsWorker, action);
     
     if(error){
