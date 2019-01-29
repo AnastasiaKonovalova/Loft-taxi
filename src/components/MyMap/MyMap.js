@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import mapboxgl from 'mapbox-gl';
 
 import styles from './MyMap.module.css';
-import {getCoords, getIsOrderMade} from '../../reducers';
+import { getCoords, getIsOrderMade } from '../../reducers';
 
 class MyMap extends Component{
     map = null;
@@ -20,7 +20,7 @@ class MyMap extends Component{
     }
 
     componentDidUpdate(prevProps){
-        const {isOrderMade, orderCoords} = this.props
+        const { isOrderMade, orderCoords } = this.props
         
         if(!isOrderMade && this.map.getLayer('route')){
             this.map.removeLayer('route');
@@ -34,7 +34,7 @@ class MyMap extends Component{
     }
 
     renderRoute = () => {
-        const {orderCoords} = this.props;
+        const { orderCoords } = this.props;
         this.map.addLayer({
             id: 'route',
             type: 'line',

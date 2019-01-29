@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import OrderForm from '../OrderForm';
 import ProfileAlert from '../ProfileAlert';
 import OrderAlert from '../OrderAlert';
-import {getIsProfileFilled, getIsOrderMade} from '../../reducers';
+import { getIsProfileFilled, getIsOrderMade } from '../../reducers';
 
 const styles = theme => ({
     container: {
@@ -35,7 +35,7 @@ const styles = theme => ({
 
 
 const OrderPage = (props) => {
-    const {classes, isProfile, isOrderMade} = props;
+    const { classes, isProfile, isOrderMade } = props;
     return (
         <Grid container spacing={0} className={classes.container} alignItems='center' justify='flex-start'>
             <Grid item xs={8}>

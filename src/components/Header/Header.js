@@ -1,5 +1,5 @@
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -8,8 +8,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import {logout} from '../../actions';
-import {getIsLoggedIn} from '../../reducers';
+import { logout } from '../../actions';
+import { getIsLoggedIn } from '../../reducers';
 
 
 const styles = theme => ({
@@ -19,9 +19,8 @@ const styles = theme => ({
 });
 
 
-class Header extends PureComponent {
+class Header extends Component {
     handleLogout = () => {
-        console.log('click logout')
         const { logout} = this.props;
         logout(false)
     }
@@ -55,10 +54,3 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {logout};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Header))
-
-// export default withStyles(styles)(Header)
-
-// <Link to={`/map`}>To Map</Link>
-// <Link to={`/profile`}>To Profile</Link>
-// <Link to={`/login`}>To Login</Link>
-// <Button variant='contained' color='default' onClick={()=>console.log('click')}>Test</Button>

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -10,8 +10,8 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import {fetchAddressesRequest, fetchCoordsRequest, setIsOrderMade} from '../../actions';
-import {getIsLoadingAddresses, getLoadErrorText, getMyAddresses, getIsLoadingCoords, getCoordsError} from '../../reducers';
+import { fetchAddressesRequest, fetchCoordsRequest, setIsOrderMade } from '../../actions';
+import { getIsLoadingAddresses, getLoadErrorText, getMyAddresses, getIsLoadingCoords, getCoordsError } from '../../reducers';
 
 const styles = theme => ({
     fieldAlign: {
@@ -37,8 +37,8 @@ class OrderForm extends Component {
     };
 
     handleButtonClick = () => {
-        const {fetchCoordsRequest, setIsOrderMade} = this.props;
-        const {address1, address2} =this.state;
+        const { fetchCoordsRequest, setIsOrderMade } = this.props;
+        const { address1, address2 } =this.state;
         
         if(address1 && address2) fetchCoordsRequest({address1, address2});
         setIsOrderMade(true);
@@ -50,13 +50,13 @@ class OrderForm extends Component {
     }
 
     componentDidMount(){
-        const {fetchAddressesRequest} = this.props;
+        const { fetchAddressesRequest } = this.props;
         fetchAddressesRequest();
     }
 
     render(){
-        const {classes, isLoadingAddresses, errorText, MyAddresses, isLoadingCoords, errorCoords} = this.props;
-        const {address1, address2} =this.state;
+        const { classes, isLoadingAddresses, errorText, MyAddresses, isLoadingCoords, errorCoords } = this.props;
+        const { address1, address2 } =this.state;
         return (
             <Grid container spacing={24} >
                 <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
@@ -150,7 +150,7 @@ const mapStateToProps = state => ({
     isLoadingCoords: getIsLoadingCoords(state),
     errorCoords: getCoordsError(state)
 });
-const mapDispatchToProps = {fetchAddressesRequest, fetchCoordsRequest, setIsOrderMade};
+const mapDispatchToProps = { fetchAddressesRequest, fetchCoordsRequest, setIsOrderMade };
 
 const WrappedOrderForm = compose(
     connect(mapStateToProps, mapDispatchToProps),

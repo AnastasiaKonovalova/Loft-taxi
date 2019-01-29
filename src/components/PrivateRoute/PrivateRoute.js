@@ -1,11 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import {getIsLoggedIn} from '../../reducers'
+import { getIsLoggedIn } from '../../reducers'
 
 
 const PrivateRoute = (props) => {
-    const {component: Component, isLoggedIn, ...rest} = props;
+    const { component: Component, isLoggedIn, ...rest } = props;
     return (
         <Route 
             {...rest}

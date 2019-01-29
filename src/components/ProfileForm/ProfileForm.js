@@ -1,10 +1,9 @@
-import React, {Component, Fragment} from 'react';
-import {compose} from 'redux';
+import React, { Component, Fragment } from 'react';
+import { compose } from 'redux';
 import { Field, reduxForm, change } from 'redux-form';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -12,9 +11,9 @@ import Grid from '@material-ui/core/Grid';
 
 import ProfileAlert from '../ProfileAlert';
 
-import {renderTextField} from '../../helpers_api';
-import {login, handleProfileSubmit, handleProfileClear} from '../../actions';
-import {getIsLoggedIn, getProfile} from '../../reducers';
+import { renderTextField} from '../../helpers_api';
+import { login, handleProfileSubmit, handleProfileClear } from '../../actions';
+import { getIsLoggedIn, getProfile } from '../../reducers';
 
 
 const styles = theme => ({
@@ -54,16 +53,16 @@ class ProfileForm extends Component {
     requiredFields = ['cardName', 'cardNumber', 'expDate', 'cvv']
 
     handleSubmit = values => {
-        const {isLoggedIn, handleProfileSubmit} = this.props;
+        const { isLoggedIn, handleProfileSubmit } = this.props;
         this.setState({
             ...this.state,
             isUpdated: true
         })        
-        handleProfileSubmit({isLoggedIn, profile: {...values}})
+        handleProfileSubmit({ isLoggedIn, profile: {...values} })
     }
 
     handleClear = () => {
-        const {handleProfileClear, change} = this.props;
+        const { handleProfileClear, change } = this.props;
         this.setState({
             isUpdated: false
         });
@@ -72,7 +71,7 @@ class ProfileForm extends Component {
     }
 
     renderForm = () => {
-        const {classes, handleSubmit} = this.props;
+        const { classes, handleSubmit } = this.props;
 
         return (
             <Fragment>
@@ -137,7 +136,7 @@ class ProfileForm extends Component {
     }
 
     renderAlert = () => {
-        const {classes} = this.props;
+        const { classes } = this.props;
         return (
             <Fragment>
             <Paper className={classes.form}>
@@ -153,8 +152,8 @@ class ProfileForm extends Component {
     }
 
     render() {
-        const {classes} = this.props;
-        const {isUpdated} = this.state;
+        const { classes } = this.props;
+        const { isUpdated } = this.state;
         return (
             <Grid container spacing={0} className={classes.container} alignItems='center' justify='center'>
                 <Grid item xs={9}>
@@ -179,7 +178,7 @@ const mapStateToProps = state => ({
     isLoggedIn: getIsLoggedIn(state),
     initialValues: getProfile(state)
 });
-const mapDispatchToProps = {login, handleProfileSubmit, handleProfileClear, change};
+const mapDispatchToProps = { login, handleProfileSubmit, handleProfileClear, change };
 
 const WrappedProfileForm = compose(
     connect(mapStateToProps, mapDispatchToProps),

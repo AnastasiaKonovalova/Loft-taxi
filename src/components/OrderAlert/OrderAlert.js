@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import {setIsOrderMade} from '../../actions'
+import { setIsOrderMade } from '../../actions'
 
 
 const styles = theme => ({
@@ -24,12 +24,12 @@ const styles = theme => ({
 
 class OrderAlert extends Component{
     handleClick = () => {
-        const {setIsOrderMade} = this.props;
+        const { setIsOrderMade } = this.props;
         setIsOrderMade(false)
     }
 
     render(){
-        const {classes} = this.props;
+        const { classes } = this.props;
 
         return (
             <Grid container spacing={24} >
@@ -48,7 +48,7 @@ class OrderAlert extends Component{
 }
 
 const mapStateToProps = state => state;
-const mapDispatchToProps = {setIsOrderMade};
+const mapDispatchToProps = { setIsOrderMade };
 
 const WrappedOrderAlert = compose(
     connect(mapStateToProps, mapDispatchToProps),

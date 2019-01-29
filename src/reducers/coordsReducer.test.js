@@ -52,4 +52,20 @@ describe('FETCH_COORDS_FAILURE', () => {
     it('store.error -> test', () => {
         expect(testState.error).toEqual('test')
     })
-})
+});
+
+describe('IS_ORDER_MADE_SET sets store.isOrderMade', () => {
+    const initialState = coordsReducer(undefined, 'test');
+    const testState = coordsReducer(initialState, setIsOrderMade(true));
+
+    it('isOrderMade in store must be true', () => {
+        expect(testState.isOrderMade).toBeTruthy()
+    });
+
+    const testState2 = coordsReducer(testState, setIsOrderMade(false));
+
+    it('isOrderMade in store must be false', () => {
+        expect(testState2.isOrderMade).toBeFalsy()
+    })
+
+});

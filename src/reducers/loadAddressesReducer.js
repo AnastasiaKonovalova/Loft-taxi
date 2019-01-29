@@ -19,7 +19,9 @@ const loadAddressesReducer = (state = initialAddressesState, action) => {
             return {
                 ...state,
                 myAddresses: action.payload,
-                isLoadingAddresses: false 
+                isLoadingAddresses: false,
+                error: null,
+                errorText: null
             }
 
         case fetchAddressesFailure.toString():

@@ -20,7 +20,7 @@ const styles = theme => ({
 })
 
 const ProfileAlert = (props) => {
-    const {classes, header, body, btnText, linkTo} = props;
+    const { classes, header, body, btnText, linkTo } = props;
 
     return (
         <Grid container spacing={24} >

@@ -19,7 +19,7 @@ function * authWorker (action){
         // const authAction = yield take(testAuth.toString());
         yield put(startSubmit('loginform'));
         const {error, success} = yield call(authPostWorker, action);
-        console.log('saga cond result', error, success)
+        // console.log('saga cond result', error, success)
         if (!success){
             // throw new SubmissionError({
             //     userName: 'Неверное имя пользователя или пароль', 

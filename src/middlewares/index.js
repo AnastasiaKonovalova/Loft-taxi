@@ -1,6 +1,6 @@
 import { all, spawn, fork } from "redux-saga/effects";
 
-import {authWatcher} from './authMiddleware';
+import {authWatcher} from './authSaga';
 import {loadAddressesWatcher} from './addressesSaga';
 import {getCoordsWatcher} from './coordsSaga';
 import {handleLocalStorageSaga} from './localStorageSaga';

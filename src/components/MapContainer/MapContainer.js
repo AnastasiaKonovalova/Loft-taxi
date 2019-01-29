@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 
 import MyMap from '../MyMap';
 import OrderPage from '../OrderPage';
