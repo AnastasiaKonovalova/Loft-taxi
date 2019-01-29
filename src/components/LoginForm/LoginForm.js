@@ -1,0 +1,144 @@
+import React, {PureComponent, Fragment} from 'react';
+import { Field, reduxForm } from 'redux-form';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom';
+
+import { withStyles } from '@material-ui/core/styles';
+
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+
+import { FormHelperText } from '@material-ui/core';
+
+import {login, testAuth} from '../../actions';
+import {getIsLoggedIn} from '../../reducers';
+import {renderTextField} from '../../helpers_api'
+
+
+const styles = theme => ({
+    container: {
+        width: '100%',
+        height: '100%',
+    },
+    form: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'stretch',
+        padding: theme.spacing.unit * 3,
+    },
+    fieldAlign: {
+        display: 'flex',
+    },
+    alignLeft: {
+        justifyContent: 'flex-start'
+    },
+    alignCenter: {
+        justifyContent: 'center'
+    }
+})
+
+class LoginForm extends PureComponent{
+
+    renderForm = () => {
+        const {classes, handleSubmit} = this.props;
+
+        return(
+            <Grid container spacing={0} className={classes.container} alignItems='center' justify='center'>
+                <Grid item xs={4} >
+                    <Paper component='form' onSubmit={handleSubmit(this.handleSubmit)}>
+                        <Grid container spacing={24} className={classes.form}>
+                            <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
+                                <Typography variant='h4'>Войти</Typography>
+                            </Grid>
+                            <Grid item xs={12} className={`${classes.alignLeft} ${classes.fieldAlign}`}>
+                                <Field
+                                    name="userName"
+                                    component={renderTextField}
+                                    label="Имя пользователя"
+                                    type='text'
+                                    fullWidth
+                                />
+                            </Grid>
+                            <Grid item xs={12} className={`${classes.alignLeft} ${classes.fieldAlign}`}>
+                                <Field
+                                    name="userPassword"
+                                    component={renderTextField}
+                                    label="Пароль"
+                                    type='password'
+                                    fullWidth
+                                />
+                            </Grid>
+                            <Grid item xs={12} className={`${classes.alignLeft} ${classes.fieldAlign}`}>
+                                <Button variant="outlined" color="primary" type='submit' component='button'>Войти</Button>
+                            </Grid>
+                        </Grid>
+                    </Paper>
+                </Grid>
+            </Grid>
+        )
+    }
+
+    handleSubmit = values => {
+        const {userName: username, userPassword: password} = values;
+        const {testAuth} = this.props;
+        
+        testAuth({username, password})
+    }
+
+    render(){
+        const {isLoggedIn} = this.props;
+        return (
+            <Fragment>
+                {
+                    isLoggedIn
+                    ? <Redirect to='/map'/>
+                    : this.renderForm()
+                }
+            </Fragment>
+        )
+    }
+}
+
+const loginSyncValidator = values => {
+    const errors = {};
+    if(!values.userName){
+        errors.userName = 'Надо указать логин'
+    } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.userName)){
+        errors.userName = 'Тут нужен ваш e-mail'
+    };
+    if(!values.userPassword) errors.userPassword = 'Надо указать пароль';
+    return errors
+}
+
+
+const mapStateToProps = state => ({
+    isLoggedIn: getIsLoggedIn(state),
+});
+const mapDispatchToProps = {login, testAuth};
+
+const WrappedLoginForm = compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withStyles(styles),
+    reduxForm({ form: 'loginform', validate: loginSyncValidator})
+)(LoginForm);
+
+export default WrappedLoginForm
+
+
+// https://material-ui.com/demos/buttons/#third-party-routing-library
+// https://material-ui.com/guides/composition/#component-property
+// https://material-ui.com/api/grid/
+// https://material-ui.com/layout/grid/
+// https://material-ui.com/api/text-field/
+// https://material-ui.com/api/form-helper-text/
+// https://material-ui.com/api/form-control/#formcontrol-api
+// https://material-ui.com/demos/text-fields/
+// https://erikras.github.io/redux-form-material-ui/
+// https://github.com/erikras/redux-form-material-ui/blob/master/example/src/Form.js
+// https://material-ui.com/api/input-base/
+// https://material-ui.com/demos/selection-controls/
