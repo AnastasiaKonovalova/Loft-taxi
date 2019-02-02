@@ -3,14 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'normalize.css';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 
 import * as serviceWorker from './serviceWorker';
 
 import RootRouter from './components/RootRouter';
-import getStore, {sagaMiddleware} from './store';
+import getStore, {sagaMiddleware} from './store/store';
 
-import rootSaga from './middlewares';
+import rootSaga from './store/middlewares';
 
 const store = getStore();
 

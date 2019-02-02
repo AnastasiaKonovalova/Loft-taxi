@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import { setIsOrderMade } from '../../actions'
+import { setIsOrderMade } from '../../store/actions';
 
 
 const styles = theme => ({
@@ -23,6 +24,11 @@ const styles = theme => ({
 })
 
 class OrderAlert extends Component{
+    static propTypes = {
+        setIsOrderMade: PropTypes.func.isRequired,
+        classes: PropTypes.object.isRequired
+    }
+
     handleClick = () => {
         const { setIsOrderMade } = this.props;
         setIsOrderMade(false)

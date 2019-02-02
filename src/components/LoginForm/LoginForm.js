@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -11,9 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-import { login, testAuth } from '../../actions';
-import { getIsLoggedIn } from '../../reducers';
-import { renderTextField } from '../../helpers_api'
+import { login, testAuth } from '../../store/actions';
+import { getIsLoggedIn } from '../../store/selectors';
+import { renderTextField } from '../../services/helpers_api'
 
 
 const styles = theme => ({
@@ -40,6 +41,14 @@ const styles = theme => ({
 })
 
 class LoginForm extends Component{
+    static propTypes = {
+        login: PropTypes.func.isRequired,
+        testAuth: PropTypes.func.isRequired,
+        isLoggedIn: PropTypes.bool.isRequired,
+        handleSubmit: PropTypes.func.isRequired,
+        classes: PropTypes.object.isRequired
+    }
+
     renderForm = () => {
         const { classes, handleSubmit } = this.props;
 

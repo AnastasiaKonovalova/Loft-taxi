@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { compose } from 'redux';
 import { Field, reduxForm, change } from 'redux-form';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -10,10 +11,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 import ProfileAlert from '../ProfileAlert';
-
-import { renderTextField} from '../../helpers_api';
-import { login, handleProfileSubmit, handleProfileClear } from '../../actions';
-import { getIsLoggedIn, getProfile } from '../../reducers';
+import { renderTextField} from '../../services/helpers_api';
+import { login, handleProfileSubmit, handleProfileClear } from '../../store/actions';
+import { getIsLoggedIn, getProfile } from '../../store/selectors';
 
 
 const styles = theme => ({
@@ -42,10 +42,20 @@ const styles = theme => ({
     alignCenter: {
         justifyContent: 'center'
     }
-})
-
+});
 
 class ProfileForm extends Component {
+    static propTypes = {
+        login: PropTypes.func.isRequired,
+        handleProfileSubmit: PropTypes.func.isRequired,
+        handleProfileClear: PropTypes.func.isRequired,
+        change: PropTypes.func.isRequired,
+        handleSubmit: PropTypes.func.isRequired,
+        isLoggedIn: PropTypes.bool.isRequired,
+        initialValues: PropTypes.object.isRequired,
+        classes: PropTypes.object.isRequired
+    }
+
     state = {
         isUpdated: false
     }

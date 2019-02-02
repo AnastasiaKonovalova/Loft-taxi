@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import { fetchAddressesRequest, fetchCoordsRequest, setIsOrderMade } from '../../actions';
-import { getIsLoadingAddresses, getLoadErrorText, getMyAddresses, getIsLoadingCoords, getCoordsError } from '../../reducers';
+import { 
+    fetchAddressesRequest, 
+    fetchCoordsRequest, 
+    setIsOrderMade } from '../../store/actions';
+import { 
+    getIsLoadingAddresses, 
+    getLoadErrorText, 
+    getMyAddresses, 
+    getIsLoadingCoords, 
+    getCoordsError } from '../../store/selectors';
 
 const styles = theme => ({
     fieldAlign: {
@@ -25,8 +33,19 @@ const styles = theme => ({
     }
 })
 
-
 class OrderForm extends Component {
+    static propTypes = {
+        fetchAddressesRequest: PropTypes.func.isRequired,
+        fetchCoordsRequest: PropTypes.func.isRequired,
+        setIsOrderMade: PropTypes.func.isRequired,
+        isLoadingAddresses: PropTypes.bool,
+        isLoadingCoords: PropTypes.bool.isRequired,
+        errorText: PropTypes.string,
+        errorCoords: PropTypes.string,
+        MyAddresses: PropTypes.array.isRequired,
+        classes: PropTypes.object.isRequired
+    }
+
     state = {
         address1: '',
         address2: '',
@@ -55,7 +74,13 @@ class OrderForm extends Component {
     }
 
     render(){
-        const { classes, isLoadingAddresses, errorText, MyAddresses, isLoadingCoords, errorCoords } = this.props;
+        const { 
+            classes, 
+            isLoadingAddresses, 
+            errorText, 
+            MyAddresses, 
+            isLoadingCoords, 
+            errorCoords } = this.props;
         const { address1, address2 } =this.state;
         return (
             <Grid container spacing={24} >
