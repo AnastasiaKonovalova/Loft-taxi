@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
@@ -84,74 +84,64 @@ class OrderForm extends Component {
             errorCoords } = this.props;
         const { address1, address2 } =this.state;
         return (
-            <Grid container spacing={24} >
+            <Grid container spacing={24}>
                 <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
                     <Typography variant='h4'>Вызов такси</Typography>
                 </Grid>
-
-                {isLoadingAddresses && (
-                    <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                        <Loader type='Oval' color='#BBB' height='50' width='50'/>
-                    </Grid>
-                )}
-                {isLoadingCoords && (
-                    <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                        <Loader type='Oval' color='#BBB' height='50' width='50'/>
-                    </Grid>
-                )}
-                {errorText && (
-                    <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                        <Typography variant='body2'>{errorText}</Typography>
-                    </Grid>
-                )}
-                {errorCoords && (
-                    <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                        <Typography variant='body2'>{errorCoords}</Typography>
-                    </Grid>
-                )}
-
-                <Grid item xs={12}>
-                    <TextField
-                        id="address-1"
-                        name="address1"
-                        select
-                        label="Выберите пункт отправления"
-                        value={this.state.address1}
-                        onChange={this.handleChange}
-                        margin="none"
-                        fullWidth
-                    >
-                        <MenuItem value=''>Выберите пункт отправления</MenuItem>
-                        {
-                            MyAddresses.map(address => (
-                                address2 === address
-                                ? address
-                                : <MenuItem key={address} value={address}>{address}</MenuItem>
-                            ))
-                        }
-                    </TextField>
+                <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
+                    {errorText && <Typography variant='body1'>{errorText}</Typography>}
+                    {errorCoords && <Typography variant='body1'>{errorCoords}</Typography>}
                 </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        id="address-2"
-                        name="address2"
-                        select
-                        label="Выберите пункт отправления"
-                        value={this.state.address2}
-                        onChange={this.handleChange}
-                        margin="none"
-                        fullWidth
-                    >
-                        <MenuItem value='' >Выберите пункт отправления</MenuItem>
-                        {
-                            MyAddresses.map(address => (
-                                address1 === address
-                                ? address
-                                : <MenuItem key={address} value={address}>{address}</MenuItem>
-                            ))
-                        }
-                    </TextField>
+
+                <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
+                    {isLoadingAddresses && <Loader type='Oval' color='#BBB' height='50' width='50'/>}
+                    {!isLoadingAddresses && (
+                        <TextField
+                            id="address-1"
+                            name="address1"
+                            select
+                            margin="normal"
+                            label="Пункт отправления"
+                            value={this.state.address1}
+                            onChange={this.handleChange}
+                            fullWidth
+                        >
+                            <MenuItem value=''>Пункт отправления</MenuItem>
+                            {
+                                MyAddresses.map(address => (
+                                    address2 === address
+                                    ? address
+                                    : <MenuItem key={address} value={address}>{address}</MenuItem>
+                                ))
+                            }
+                        </TextField>
+                    )}
                 </Grid>
+                <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
+                    {isLoadingAddresses && <Loader type='Oval' color='#BBB' height='50' width='50'/>}
+                    {!isLoadingAddresses && (
+                        <TextField
+                            id="address-2"
+                            name="address2"
+                            select
+                            margin="normal"
+                            label="Пункт назначения"
+                            value={this.state.address2}
+                            onChange={this.handleChange}
+                            fullWidth
+                        >
+                            <MenuItem value='' >Пункт назначения</MenuItem>
+                            {
+                                MyAddresses.map(address => (
+                                    address1 === address
+                                    ? address
+                                    : <MenuItem key={address} value={address}>{address}</MenuItem>
+                                ))
+                            }
+                        </TextField>
+                    )}
+                </Grid>
+
                 <Grid item xs={12} className={`${classes.alignLeft} ${classes.fieldAlign}`}>
                     <Button 
                         variant="outlined" 

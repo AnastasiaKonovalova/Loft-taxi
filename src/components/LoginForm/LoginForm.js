@@ -54,7 +54,7 @@ class LoginForm extends Component{
 
         return(
             <Grid container spacing={0} className={classes.container} alignItems='center' justify='center'>
-                <Grid item xs={4} >
+                <Grid item xs={8} md={4}>
                     <Paper component='form' onSubmit={handleSubmit(this.handleSubmit)}>
                         <Grid container spacing={24} className={classes.form}>
                             <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>

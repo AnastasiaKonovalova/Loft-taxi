@@ -37,7 +37,7 @@ const OrderPage = (props) => {
     const { classes, isProfile, isOrderMade } = props;
     return (
         <Grid container spacing={0} className={classes.container} alignItems='center' justify='flex-start'>
-            <Grid item xs={8}>
+            <Grid item xs={12} md={8}>
                 <Paper className={classes.form}>
                     {isProfile && !isOrderMade && <OrderForm/>}
                     {isProfile && isOrderMade && <OrderAlert/>}

@@ -144,7 +144,7 @@ class ProfileForm extends Component {
                             <Typography variant='h4' className={`${classes.alignCenter} ${classes.fieldAlign}`}>Профиль</Typography>
                             <Typography variant='h6' className={`${classes.alignLeft} ${classes.fieldAlign}`}>Способ оплаты</Typography>
                         </Grid>
-                        <Grid item xs={6} >
+                        <Grid item xs={12} sm={6} md={6}>
                             <Field
                                 name="cardName"
                                 component={renderTextField}
@@ -155,7 +155,7 @@ class ProfileForm extends Component {
                                 format={cardNameFormatter}
                             />
                         </Grid>
-                        <Grid item xs={6} >
+                        <Grid item xs={12} sm={6} md={6}>
                             <Field
                                 name="cardNumber"
                                 component={renderTextField}
@@ -166,7 +166,7 @@ class ProfileForm extends Component {
                                 parse={cardNumberParser}
                             />
                         </Grid>
-                        <Grid item xs={6} >
+                        <Grid item xs={12} sm={6} md={6}>
                             <Field
                                 name="expDate"
                                 component={renderTextField}
@@ -178,7 +178,7 @@ class ProfileForm extends Component {
                                 format={expDateFormatter}
                             />
                         </Grid>
-                        <Grid item xs={6} >
+                        <Grid item xs={12} sm={6} md={6}>
                             <Field
                                 name="cvv"
                                 component={renderTextField}
@@ -192,7 +192,7 @@ class ProfileForm extends Component {
                             <Button variant="contained" color="primary" component='button' type='submit'>Сохранить</Button>
                         </Grid>
                         <Grid item xs={6} className={`${classes.alignLeft} ${classes.fieldAlign}`}>
-                            <Button variant="contained" color="primary" component='button' onClick={this.handleClear}>Удалить данные</Button>
+                            <Button variant="contained" color="primary" component='button' onClick={this.handleClear}>Удалить</Button>
                         </Grid>
                     </Grid>
                 </Paper>
@@ -222,7 +222,7 @@ class ProfileForm extends Component {
         const { isUpdated } = this.state;
         return (
             <Grid container spacing={0} className={classes.container} alignItems='center' justify='center'>
-                <Grid item xs={9}>
+                <Grid item xs={10} md={6}>
                     {isUpdated 
                         ? this.renderAlert()
                         : this.renderForm()
