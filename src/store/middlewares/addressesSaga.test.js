@@ -4,20 +4,7 @@ import {
     fetchAddressesSuccess, 
     fetchAddressesFailure } from '../../store/actions';
 import { loadAddressList } from '../../services/helpers_api';
-import { saveAddressesWorker, fetchAddressesWorker } from './addressesSaga';
-
-// describe('fetchAddressesWorker', () => {
-//     const gen = fetchAddressesWorker(fetchAddressesRequest);
-
-//     it('calls loadAddressList', () => {
-//         expect(gen.next().value).toEqual(call(loadAddressList))
-//     });
-
-//     it('saga is finished', () => {
-//         expect(gen.next().done).toEqual(true)
-//     })
-// });
-
+import { saveAddressesWorker } from './addressesSaga';
 
 describe('saveAddressesWorker with error', () => {
     const gen = saveAddressesWorker(fetchAddressesRequest);
