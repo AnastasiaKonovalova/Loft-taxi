@@ -8,12 +8,13 @@ export const renderTextField = ({
         name,
         label,
         input,
+        placeholder,
         meta: {touched, invalid, error},
         ...custom
     }) => (
         <TextField
             label={label}
-            placeholder={label}
+            placeholder={placeholder ? placeholder : label}
             margin='none'
             type={type}
             error={touched && error && true}

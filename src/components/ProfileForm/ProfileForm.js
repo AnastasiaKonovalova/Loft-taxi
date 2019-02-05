@@ -44,6 +44,59 @@ const styles = theme => ({
     }
 });
 
+const cardNameFormatter = value => {
+    if(!value) return '';
+    const onlyLetters = value.replace(/[^A-Za-z\s]/, '');
+    return onlyLetters || ''
+};
+
+const cardNumberFormatter = value => {
+    if(!value) return '';
+
+    const onlyNum = value.replace(/[^\d\s]/g, '');
+    const reg = /\d{1,4}/g;
+    return onlyNum && onlyNum.substring(0, 16).match(reg).join(' ');
+};
+
+const cardNumberParser = value => {
+    if(!value) return '';
+    return value.replace(/\s/g, '');
+};
+
+const expDateFormatter = value => {
+    if(!value || value === '/') return '';
+    const onlyNum = value.replace(/[^\d]/g, '');
+    if(onlyNum){
+        let month = onlyNum.substring(0, 2);
+        let year = onlyNum.substring(2, 4);
+        if(+month > 12) month = '12';
+        return `${month}/${year}`
+    }
+}
+
+const cvvFormatter = value => {
+    if(!value) return '';
+
+    const onlyNum = value.replace(/[^\d]/, '');
+    return onlyNum && onlyNum.substring(0, 3)
+};
+
+const profileSyncValidator = values => {
+    const requiredFields = ['cardName', 'cardNumber', 'expDate', 'cvv'];
+    const errors = {};
+    requiredFields.forEach(field => {if(!values[field]) errors[field] = 'Это обязательное поле'});
+    if(values['expDate']){
+        let month = values['expDate'].substring(0, 2);
+        let year = values['expDate'].substring(3);
+        const date = new Date(+('20' + year), +month - 1);
+        if(+date < Date.now()) errors['expDate'] = 'Дата указана неверно';
+    }
+    if( !/^\S+\s\S+$/ig.test(values['cardName']) ) errors['cardName'] = 'Укажите имя как на карте';
+    if( values['cardNumber'] && values['cardNumber'].length < 16 ) errors['cardNumber'] = 'Номер карты должен состоять из 16 цифр';
+    if( !/^\d{3}$/ig.test(values['cvv']) ) errors['cvv'] = 'CVV должен состоять из 3 цифр';
+    return errors
+}
+
 class ProfileForm extends Component {
     static propTypes = {
         login: PropTypes.func.isRequired,
@@ -99,6 +152,7 @@ class ProfileForm extends Component {
                                 type='text'
                                 required
                                 fullWidth
+                                format={cardNameFormatter}
                             />
                         </Grid>
                         <Grid item xs={6} >
@@ -106,9 +160,10 @@ class ProfileForm extends Component {
                                 name="cardNumber"
                                 component={renderTextField}
                                 label="Номер карты"
-                                type='number'
                                 required
                                 fullWidth
+                                format={cardNumberFormatter}
+                                parse={cardNumberParser}
                             />
                         </Grid>
                         <Grid item xs={6} >
@@ -116,10 +171,11 @@ class ProfileForm extends Component {
                                 name="expDate"
                                 component={renderTextField}
                                 label="Дата окончания действия"
-                                type='date'
                                 required
                                 fullWidth
+                                placeholder='__ /__'
                                 InputLabelProps={{ shrink: true }}
+                                format={expDateFormatter}
                             />
                         </Grid>
                         <Grid item xs={6} >
@@ -127,9 +183,9 @@ class ProfileForm extends Component {
                                 name="cvv"
                                 component={renderTextField}
                                 label="CVV"
-                                type='number'
                                 required
                                 fullWidth
+                                format={cvvFormatter}
                             />
                         </Grid>
                         <Grid item xs={6} className={`${classes.alignLeft} ${classes.fieldAlign}`}>
@@ -177,12 +233,6 @@ class ProfileForm extends Component {
     }
 }
 
-const profileSyncValidator = values => {
-    const requiredFields = ['cardName', 'cardNumber', 'expDate', 'cvv'];
-    const errors = {};
-    requiredFields.forEach(field => {if(!values[field]) errors[field] = 'Это обязательное поле'})
-    return errors
-}
 
 const mapStateToProps = state => ({
     isLoggedIn: getIsLoggedIn(state),

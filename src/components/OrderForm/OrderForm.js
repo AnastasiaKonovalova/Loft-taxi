@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
+import Loader from 'react-loader-spinner';
 
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -90,12 +91,12 @@ class OrderForm extends Component {
 
                 {isLoadingAddresses && (
                     <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                        <Typography variant='body2'>Загрузка сохраненных пунктов...</Typography>
+                        <Loader type='Oval' color='#BBB' height='50' width='50'/>
                     </Grid>
                 )}
                 {isLoadingCoords && (
                     <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                        <Typography variant='body2'>Строим маршрут....</Typography>
+                        <Loader type='Oval' color='#BBB' height='50' width='50'/>
                     </Grid>
                 )}
                 {errorText && (
