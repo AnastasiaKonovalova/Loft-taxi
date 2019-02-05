@@ -5,16 +5,6 @@ import {
     fetchAddressesFailure } from '../actions';
 import { loadAddressList } from '../../services/helpers_api';
 
-export function * fetchAddressesWorker(action){
-    try {
-        const { data } = yield call(loadAddressList);
-
-        return data;
-    } catch (error){
-        return {error: error.message};
-    }
-}
-
 export function * saveAddressesWorker(){
     const {error, data} = yield call(loadAddressList);
     try {
