@@ -1,5 +1,5 @@
 import { spawn, takeLeading, takeEvery } from "redux-saga/effects";
-import {handleProfileSubmit, handleProfileClear, logout, login} from '../actions';
+import {handleProfileSubmit, handleProfileClear, logout, login} from '..//actions';
 
 function saveProfileWorker(action) {
     const {isLoggedIn, profile} = action.payload;

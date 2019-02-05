@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -35,6 +35,14 @@ const ProfileAlert = (props) => {
             </Grid>
         </Grid>
     )
+};
+
+ProfileAlert.propTypes = {
+    header: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    btnText: PropTypes.string.isRequired,
+    linkTo: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(ProfileAlert)

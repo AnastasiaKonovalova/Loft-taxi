@@ -1,4 +1,4 @@
-import { all, spawn, fork } from "redux-saga/effects";
+import { spawn } from "redux-saga/effects";
 
 import {authWatcher} from './authSaga';
 import {loadAddressesWatcher} from './addressesSaga';

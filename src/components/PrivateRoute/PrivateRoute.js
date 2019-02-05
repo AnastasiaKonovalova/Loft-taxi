@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { getIsLoggedIn } from '../../reducers'
+import PropTypes from 'prop-types';
 
+import { getIsLoggedIn } from '../../store/selectors';
 
 const PrivateRoute = (props) => {
     const { component: Component, isLoggedIn, ...rest } = props;
@@ -15,6 +16,14 @@ const PrivateRoute = (props) => {
             }
         />
     )
+};
+
+PrivateRoute.propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    component: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.element
+    ]).isRequired
 }
 
 const mapStateToProps = state => ({

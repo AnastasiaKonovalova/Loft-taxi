@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapboxgl from 'mapbox-gl';
+import PropTypes from 'prop-types';
 
 import styles from './MyMap.module.css';
-import { getCoords, getIsOrderMade } from '../../reducers';
+import { getCoords, getIsOrderMade } from '../../store/selectors';
 
 class MyMap extends Component{
+    static propTypes = {
+        orderCoords: PropTypes.array,
+        isOrderMade: PropTypes.bool
+    }
+
     map = null;
     mapContainer = React.createRef();
   

@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-
 import OrderForm from '../OrderForm';
 import ProfileAlert from '../ProfileAlert';
 import OrderAlert from '../OrderAlert';
-import { getIsProfileFilled, getIsOrderMade } from '../../reducers';
+import { getIsProfileFilled, getIsOrderMade } from '../../store/selectors';
 
 const styles = theme => ({
     container: {
@@ -33,12 +33,11 @@ const styles = theme => ({
     }
 })
 
-
 const OrderPage = (props) => {
     const { classes, isProfile, isOrderMade } = props;
     return (
         <Grid container spacing={0} className={classes.container} alignItems='center' justify='flex-start'>
-            <Grid item xs={8}>
+            <Grid item xs={12} md={8}>
                 <Paper className={classes.form}>
                     {isProfile && !isOrderMade && <OrderForm/>}
                     {isProfile && isOrderMade && <OrderAlert/>}
@@ -56,6 +55,11 @@ const OrderPage = (props) => {
     ) 
 }
 
+OrderPage.propTypes = {
+    isProfile: PropTypes.bool.isRequired,
+    isOrderMade: PropTypes.bool,
+    classes: PropTypes.object.isRequired
+}
 
 const mapStateToProps = state => ({
     isProfile: getIsProfileFilled(state),

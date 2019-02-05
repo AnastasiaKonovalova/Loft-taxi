@@ -1,4 +1,5 @@
-import rootReducer, {
+import rootReducer from './reducers';
+import {
     getIsLoggedIn,
     getProfile,
     getIsProfileFilled,
@@ -9,7 +10,7 @@ import rootReducer, {
     getCoordsError,
     getCoords,
     getIsOrderMade
-} from './index';
+} from './selectors';
 
 describe('Selectors return right state fields', () => {
     const testStore = rootReducer(undefined, 'test');

@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-
+import { myHttp } from './instance';
 
 
 export const renderTextField = ({
@@ -8,12 +8,13 @@ export const renderTextField = ({
         name,
         label,
         input,
+        placeholder,
         meta: {touched, invalid, error},
         ...custom
     }) => (
         <TextField
             label={label}
-            placeholder={label}
+            placeholder={placeholder ? placeholder : label}
             margin='none'
             type={type}
             error={touched && error && true}
@@ -24,25 +25,25 @@ export const renderTextField = ({
 )
 
 export const checkAuth = ({username, password}) => {
-    return fetch(`https://loft-taxi.glitch.me/auth?username=${username.trim()}&password=${password.trim()}`, {
+    return myHttp(`/auth?username=${username.trim()}&password=${password.trim()}`, {
         method: 'GET',
         mode: 'cors'
     })
-    .then(response => response.json())
+    .then(response => response)
 };
 
 export const loadAddressList = () => {
-    return fetch('https://loft-taxi.glitch.me/addressList', {
+    return myHttp('/addressList', {
         method: 'GET',
         mode: 'cors'
     })
-    .then(response => response.json())
+    .then(response =>  response)
 };
 
 export const loadCoords = ({address1, address2}) => {
-    return fetch(`https://loft-taxi.glitch.me/route?address1=${address1}&address2=${address2}`, {
+    return myHttp(`/route?address1=${address1}&address2=${address2}`, {
         method: 'GET',
         mode: 'cors'
     })
-    .then(response => response.json())
+    .then(response => response )
 };
