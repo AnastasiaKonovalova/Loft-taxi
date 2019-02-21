@@ -53,6 +53,6 @@ describe('Selectors return right state fields', () => {
     });
 
     it('getIsOrderMade returns isOrderMade - null', () => {
-        expect(getIsOrderMade(testStore)).toBe(null)
+        expect(getIsOrderMade(testStore)).toBe(false)
     })
 })
