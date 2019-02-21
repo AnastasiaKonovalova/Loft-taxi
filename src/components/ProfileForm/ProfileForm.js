@@ -105,7 +105,7 @@ class ProfileForm extends Component {
         change: PropTypes.func.isRequired,
         handleSubmit: PropTypes.func.isRequired,
         isLoggedIn: PropTypes.bool.isRequired,
-        initialValues: PropTypes.object.isRequired,
+        initialValues: PropTypes.object,
         classes: PropTypes.object.isRequired
     }
 

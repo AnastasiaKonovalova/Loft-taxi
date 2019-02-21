@@ -28,7 +28,7 @@ const loadAddressesReducer = (state = initialAddressesState, action) => {
             return {
                 ...state,
                 error: action.payload,
-                errorText: 'Ошибка загрузки',
+                errorText: 'Ошибка загрузки. Проверьте подключение к сети',
                 isLoadingAddresses: false 
             }
 

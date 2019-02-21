@@ -7,19 +7,19 @@ function saveProfileWorker(action) {
 }
 
 function clearProfileWorker() {
-    const {isLoggedIn} = JSON.parse(localStorage.state);
+    const {isLoggedIn} = localStorage.state ? JSON.parse(localStorage.state) : false;
     localStorage.state = JSON.stringify({isLoggedIn: isLoggedIn});
 }
 
 function logoutWorker(action){
     const isLoggedIn = action.payload;
-    const {profile} = JSON.parse(localStorage.state);
+    const {profile} = localStorage.state ? JSON.parse(localStorage.state) : {};
     localStorage.state = JSON.stringify({isLoggedIn: isLoggedIn, profile});
 }
 
 function loginWorker(action){
     const isLoggedIn = action.payload;
-    const {profile} = JSON.parse(localStorage.state);
+    const {profile} = localStorage.state ? JSON.parse(localStorage.state) : {};
     localStorage.state = JSON.stringify({isLoggedIn: isLoggedIn, profile});
 }
 

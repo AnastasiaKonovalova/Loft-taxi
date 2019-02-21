@@ -5,16 +5,16 @@ import {
     fetchAddressesFailure } from '../actions';
 import { loadAddressList } from '../../services/helpers_api';
 
-export function * saveAddressesWorker(){
-    const {error, data} = yield call(loadAddressList);
+export function * loadAddressesWorker(){
     try {
+        const {error, data} = yield call(loadAddressList);
         if(!error) yield put(fetchAddressesSuccess(data.addresses));
-        if(error) yield put(fetchAddressesFailure(error))
+        if(error) yield put(fetchAddressesFailure(error.message))
     } catch (error){
-        yield put(fetchAddressesFailure(error))
+        yield put(fetchAddressesFailure(error.message))
     }
 }
 
 export function * loadAddressesWatcher(){
-    yield takeEvery(fetchAddressesRequest.toString(), saveAddressesWorker);
+    yield takeEvery(fetchAddressesRequest.toString(), loadAddressesWorker);
 };

@@ -8,12 +8,12 @@ import {loadCoords} from '../../services/helpers_api';
 
 
 export function * saveCoordsWorker(action){
-    const { error, data } = yield call(loadCoords, action.payload);
     try {
+        const { error, data } = yield call(loadCoords, action.payload);
         if(!error) yield put(fetchCoordsSuccess(data));
-        if(error) yield put(fetchCoordsFailure(error))
+        if(error) yield put(fetchCoordsFailure(error.mesage))
     } catch (error) {
-        yield put(fetchCoordsFailure(error))
+        yield put(fetchCoordsFailure(error.message))
     }
 }
 

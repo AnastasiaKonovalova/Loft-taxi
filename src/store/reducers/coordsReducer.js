@@ -30,6 +30,7 @@ const coordsReducer = (state = initialState, action) => {
                 ...state,
                 coords: null,
                 error: action.payload,
+                errorCoords: 'Ошибка построения маршрута. Проверьте подключение к сети',
                 isLoadingCoords: false,
             }
 

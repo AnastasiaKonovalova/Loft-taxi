@@ -4,10 +4,10 @@ import {
     fetchAddressesSuccess, 
     fetchAddressesFailure } from '../../store/actions';
 import { loadAddressList } from '../../services/helpers_api';
-import { saveAddressesWorker } from './addressesSaga';
+import { loadAddressesWorker } from './addressesSaga';
 
-describe('saveAddressesWorker with error', () => {
-    const gen = saveAddressesWorker(fetchAddressesRequest);
+describe('loadAddressesWorker with error', () => {
+    const gen = loadAddressesWorker(fetchAddressesRequest);
 
     it('calls loadAddressList', () => {
         expect(gen.next().value).toEqual(call(loadAddressList))
@@ -22,8 +22,8 @@ describe('saveAddressesWorker with error', () => {
     })
 });
 
-describe('saveAddressesWorker with success', () => {
-    const gen = saveAddressesWorker(fetchAddressesRequest);
+describe('loadAddressesWorker with success', () => {
+    const gen = loadAddressesWorker(fetchAddressesRequest);
     const testAdresses = {data: {addresses: ['Пулково (LED)', 'Волковское кладбище']}};
 
     it('calls loadAddressList', () => {

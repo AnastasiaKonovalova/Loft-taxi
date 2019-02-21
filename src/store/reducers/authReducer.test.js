@@ -29,7 +29,6 @@ describe('LOGOUT makes store.isLoggedIn to be false', () => {
 
 describe('HANDLE_PROFILE_SUBMIT saves profile details to store', () => {
     const initialState = authReducer(undefined, 'test');
-    const requiredFields = ['cardName', 'cardNumber', 'expDate', 'cvv'];
     const testProfile1 = {
         cardName: 'test',
         cardNumber: '1111222233334444',

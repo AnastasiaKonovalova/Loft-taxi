@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import Loader from 'react-loader-spinner';
 
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -10,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { 
     fetchAddressesRequest, 
@@ -19,8 +19,7 @@ import {
     getIsLoadingAddresses, 
     getLoadErrorText, 
     getMyAddresses, 
-    getIsLoadingCoords, 
-    getCoordsError } from '../../store/selectors';
+    getIsLoadingCoords } from '../../store/selectors';
 
 const styles = theme => ({
     fieldAlign: {
@@ -31,6 +30,12 @@ const styles = theme => ({
     },
     alignCenter: {
         justifyContent: 'center'
+    },
+    loader: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 192
     }
 })
 
@@ -70,32 +75,19 @@ class OrderForm extends Component {
     }
 
     componentDidMount(){
-        const { fetchAddressesRequest } = this.props;
-        fetchAddressesRequest();
+        const { fetchAddressesRequest, MyAddresses } = this.props;
+        if(!MyAddresses || MyAddresses.length === 0) fetchAddressesRequest();
     }
 
-    render(){
+    renderInputs = () => {
         const { 
             classes, 
-            isLoadingAddresses, 
-            errorText, 
-            MyAddresses, 
-            isLoadingCoords, 
-            errorCoords } = this.props;
+            MyAddresses } = this.props;
         const { address1, address2 } =this.state;
         return (
-            <Grid container spacing={24}>
+            <Fragment>
                 <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                    <Typography variant='h4'>Вызов такси</Typography>
-                </Grid>
-                <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                    {errorText && <Typography variant='body1'>{errorText}</Typography>}
-                    {errorCoords && <Typography variant='body1'>{errorCoords}</Typography>}
-                </Grid>
-
-                <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                    {isLoadingAddresses && <Loader type='Oval' color='#BBB' height='50' width='50'/>}
-                    {!isLoadingAddresses && (
+                    {
                         <TextField
                             id="address-1"
                             name="address1"
@@ -115,11 +107,10 @@ class OrderForm extends Component {
                                 ))
                             }
                         </TextField>
-                    )}
+                    }
                 </Grid>
                 <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
-                    {isLoadingAddresses && <Loader type='Oval' color='#BBB' height='50' width='50'/>}
-                    {!isLoadingAddresses && (
+                    {
                         <TextField
                             id="address-2"
                             name="address2"
@@ -139,8 +130,34 @@ class OrderForm extends Component {
                                 ))
                             }
                         </TextField>
-                    )}
+                    }
                 </Grid>
+            </Fragment>
+        )
+    }
+
+    render(){
+        const { 
+            classes, 
+            isLoadingAddresses, 
+            errorText } = this.props;
+        const { address1, address2 } =this.state;
+        return (
+            <Grid container spacing={24}>
+                <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
+                    <Typography variant='h4'>Вызов такси</Typography>
+                </Grid>
+                {errorText && (
+                    <Grid item xs={12} className={`${classes.alignCenter} ${classes.fieldAlign}`}>
+                        <Typography variant='body1'>{errorText}</Typography>
+                    </Grid>
+                )}
+
+                {
+                    isLoadingAddresses
+                    ? <Grid item xs={12} className={classes.loader}><CircularProgress/></Grid>
+                    : this.renderInputs()
+                }
 
                 <Grid item xs={12} className={`${classes.alignLeft} ${classes.fieldAlign}`}>
                     <Button 
@@ -163,8 +180,7 @@ const mapStateToProps = state => ({
     isLoadingAddresses: getIsLoadingAddresses(state),
     errorText: getLoadErrorText(state),
     MyAddresses: getMyAddresses(state),
-    isLoadingCoords: getIsLoadingCoords(state),
-    errorCoords: getCoordsError(state)
+    isLoadingCoords: getIsLoadingCoords(state)
 });
 const mapDispatchToProps = { fetchAddressesRequest, fetchCoordsRequest, setIsOrderMade };
 

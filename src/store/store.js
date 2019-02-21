@@ -6,9 +6,11 @@ import rootReducer from './reducers';
 
 
 const getInitialState = () => {
-    let {isLoggedIn, profile} = JSON.parse(localStorage.state);
-    if(!profile) profile = {};
-    if(!isLoggedIn) isLoggedIn = false
+    let {isLoggedIn, profile} = localStorage.state 
+    ? JSON.parse(localStorage.state) 
+    : {isLoggedIn: false, profile: {}};
+    if(profile === undefined) profile = {};
+    if(isLoggedIn === undefined) isLoggedIn = false;
     return {isLoggedIn: isLoggedIn, profile: profile};
 }
 

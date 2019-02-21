@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 import { setIsOrderMade } from '../../store/actions';
-
+import { getCoordsError } from '../../store/selectors';
 
 const styles = theme => ({
     fieldAlign: {
@@ -35,7 +35,7 @@ class OrderAlert extends Component{
     }
 
     render(){
-        const { classes } = this.props;
+        const { classes, errorCoords } = this.props;
 
         return (
             <Grid container spacing={24} >
@@ -43,7 +43,8 @@ class OrderAlert extends Component{
                     <Typography variant='h4'>Заказ размещён</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant='body1'>Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут</Typography>
+                    {errorCoords && <Typography variant='body1'>{errorCoords}</Typography>}
+                    {!errorCoords && <Typography variant='body1'>Ваше такси уже едет к вам. Прибудет приблизительно через 10 минут</Typography>}
                 </Grid>
                 <Grid item xs={12} className={`${classes.alignLeft} ${classes.fieldAlign}`}>
                     <Button variant="outlined" color="primary" component='button' onClick={this.handleClick}>сделать новый заказ</Button>
@@ -53,7 +54,9 @@ class OrderAlert extends Component{
     }
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => ({
+    errorCoords: getCoordsError(state)
+});
 const mapDispatchToProps = { setIsOrderMade };
 
 const WrappedOrderAlert = compose(
