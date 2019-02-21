@@ -88,7 +88,7 @@ describe('authWorker with success', () => {
     });
 
     it('puts stopSubmit with error', () => {
-        expect(gen.next(testSuccess).value).toEqual(put(login(true)))
+        expect(gen.next(testSuccess).value).toEqual(put(login()))
     });
 
     it('saga is finished', () => {

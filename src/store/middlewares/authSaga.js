@@ -29,7 +29,7 @@ export function * authWorker (action){
             _error: data.error
         }))
     } else if(data.success){
-        yield put(login(data.success));
+        yield put(login());
     }
 }
 

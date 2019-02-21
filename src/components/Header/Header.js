@@ -31,7 +31,7 @@ class Header extends Component {
     handleLogout = () => {
         const { logout, setIsOrderMade } = this.props;
         setIsOrderMade(false);
-        logout(false)
+        logout()
     }
 
     render(){

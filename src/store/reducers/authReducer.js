@@ -12,14 +12,14 @@ const authReducer = (state = initialState, action) => {
         case login.toString():
             return {
                 ...state,
-                isLoggedIn: action.payload,
+                isLoggedIn: true,
             }
 
         case logout.toString():
 
             return {
                 ...state,
-                isLoggedIn: action.payload,
+                isLoggedIn: false,
             }
 
         case handleProfileSubmit.toString():

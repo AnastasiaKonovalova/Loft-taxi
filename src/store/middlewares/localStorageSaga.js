@@ -12,13 +12,13 @@ function clearProfileWorker() {
 }
 
 function logoutWorker(action){
-    const isLoggedIn = action.payload;
+    const isLoggedIn = false;
     const {profile} = localStorage.state ? JSON.parse(localStorage.state) : {};
     localStorage.state = JSON.stringify({isLoggedIn: isLoggedIn, profile});
 }
 
 function loginWorker(action){
-    const isLoggedIn = action.payload;
+    const isLoggedIn = true;
     const {profile} = localStorage.state ? JSON.parse(localStorage.state) : {};
     localStorage.state = JSON.stringify({isLoggedIn: isLoggedIn, profile});
 }

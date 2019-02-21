@@ -4,7 +4,7 @@ import authReducer from './authReducer';
 
 describe('LOGIN makes store.isLoggedIn to be true', () => {
     const initialState = authReducer(undefined, 'test');
-    const testState = authReducer(initialState, login(true));
+    const testState = authReducer(initialState, login());
 
     it('creates valid initialStore', () => {
         expect(Object.keys(initialState)).toContain(
@@ -20,7 +20,7 @@ describe('LOGIN makes store.isLoggedIn to be true', () => {
 
 describe('LOGOUT makes store.isLoggedIn to be false', () => {
     const initialState = authReducer(undefined, 'test');
-    const testState = authReducer(initialState, logout(false));
+    const testState = authReducer(initialState, logout());
 
     it('isLoggedIn in store must be false', () => {
         expect(testState.isLoggedIn).toBeFalsy()
