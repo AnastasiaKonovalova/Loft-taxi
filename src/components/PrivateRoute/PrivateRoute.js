@@ -29,7 +29,5 @@ PrivateRoute.propTypes = {
 const mapStateToProps = state => ({
     isLoggedIn: getIsLoggedIn(state),
 });
-const mapDispatchToProps = {};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute)
+export default connect(mapStateToProps, null)(PrivateRoute)

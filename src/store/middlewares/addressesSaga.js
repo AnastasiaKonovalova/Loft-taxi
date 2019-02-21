@@ -9,9 +9,9 @@ export function * loadAddressesWorker(){
     try {
         const {error, data} = yield call(loadAddressList);
         if(!error) yield put(fetchAddressesSuccess(data.addresses));
-        if(error) yield put(fetchAddressesFailure(error.message))
+        if(error) yield put(fetchAddressesFailure(error))
     } catch (error){
-        yield put(fetchAddressesFailure(error.message))
+        yield put(fetchAddressesFailure(error))
     }
 }
 

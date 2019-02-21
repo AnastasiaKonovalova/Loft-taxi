@@ -4,7 +4,7 @@ const initialState = {
     isLoadingCoords: false,
     error: null,
     coords: null,
-    isOrderMade: null
+    isOrderMade: false
 }
 
 

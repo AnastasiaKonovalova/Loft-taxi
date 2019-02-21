@@ -7,7 +7,6 @@ import { checkAuth } from '../../services/helpers_api';
 export function * authPostWorker(action) {
     try {
         const result = yield call(checkAuth, action.payload)
-
         return result
     } catch (error) {
         return {error: error.message}

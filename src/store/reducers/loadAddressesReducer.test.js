@@ -57,6 +57,6 @@ describe('FETCH_ADDRESSES_FAILURE', () => {
     });
 
     it('store.errorText -> Ошибка загрузки', () => {
-        expect(testState.errorText).toEqual('Ошибка загрузки')
+        expect(testState.errorText).toEqual('Ошибка загрузки. Проверьте подключение к сети')
     })
 });

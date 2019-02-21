@@ -14,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 
 import { login, testAuth } from '../../store/actions';
 import { getIsLoggedIn } from '../../store/selectors';
-import { renderTextField } from '../../services/helpers_api'
+import { renderTextField } from '../../services/helpers'
 
 
 const styles = theme => ({

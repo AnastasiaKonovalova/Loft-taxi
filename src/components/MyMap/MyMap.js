@@ -9,7 +9,7 @@ import { getCoords, getIsOrderMade } from '../../store/selectors';
 class MyMap extends Component{
     static propTypes = {
         orderCoords: PropTypes.array,
-        isOrderMade: PropTypes.bool
+        isOrderMade: PropTypes.bool.isRequired
     }
 
     map = null;
@@ -26,17 +26,18 @@ class MyMap extends Component{
     }
 
     componentDidUpdate(prevProps){
-        const { isOrderMade, orderCoords } = this.props
+        if (prevProps !== this.props) {
+            const { isOrderMade, orderCoords } = this.props
         
-        if(!isOrderMade && this.map.getLayer('route')){
-            this.map.removeLayer('route');
-            this.map.removeSource('route');
+            if(!isOrderMade && this.map.getLayer('route')){
+                this.map.removeLayer('route');
+                this.map.removeSource('route');
+            }
+            
+            if(isOrderMade && orderCoords && orderCoords.length > 0) {
+                if(prevProps.orderCoords !== orderCoords) this.renderRoute()
+            }
         }
-        
-        if(isOrderMade && orderCoords && orderCoords.length > 0) {
-            if(prevProps.orderCoords !== orderCoords) this.renderRoute()
-        }
-        
     }
 
     renderRoute = () => {
@@ -81,7 +82,5 @@ const mapStateToProps = state => ({
     orderCoords: getCoords(state),
     isOrderMade: getIsOrderMade(state)
 });
-const mapDispatchToProps = null;
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(MyMap)
+export default connect(mapStateToProps, null)(MyMap)

@@ -1,10 +1,10 @@
 import { put, call } from "redux-saga/effects";
 
-import { saveCoordsWorker } from './coordsSaga';
+import { getCoordsWorker } from './coordsSaga';
 import { fetchCoordsSuccess, fetchCoordsFailure } from '../../store/actions';
 import { loadCoords } from '../../services/helpers_api';
 
-describe('saveCoordsWorker with error', () => {
+describe('getCoordsWorker with error', () => {
     const testAction = {
         type: 'FETCH_COORDS_REQUEST',
         payload: {
@@ -12,7 +12,7 @@ describe('saveCoordsWorker with error', () => {
             address2: 'test2'
         }
     };
-    const gen = saveCoordsWorker(testAction);
+    const gen = getCoordsWorker(testAction);
 
     it('calls loadCoords with action.payload', () => {
         expect(gen.next().value).toEqual(call(loadCoords, testAction.payload))
@@ -27,7 +27,7 @@ describe('saveCoordsWorker with error', () => {
     })
 });
 
-describe('saveCoordsWorker with success', () => {
+describe('getCoordsWorker with success', () => {
     const testAction = {
         type: 'FETCH_COORDS_REQUEST',
         payload: {
@@ -35,7 +35,7 @@ describe('saveCoordsWorker with success', () => {
             address2: 'test2'
         }
     };
-    const gen = saveCoordsWorker(testAction);
+    const gen = getCoordsWorker(testAction);
     const testCoords = {data: [[30, 50], [40, 60]]};
 
     it('calls loadCoords with action.payload', () => {

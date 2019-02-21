@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 import ProfileAlert from '../ProfileAlert';
-import { renderTextField} from '../../services/helpers_api';
+import { renderTextField } from '../../services/helpers';
 import { login, handleProfileSubmit, handleProfileClear } from '../../store/actions';
 import { getIsLoggedIn, getProfile } from '../../store/selectors';
 
